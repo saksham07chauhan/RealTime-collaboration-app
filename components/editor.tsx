@@ -20,7 +20,8 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
   const { edgestore } = useEdgeStore();
 
   // Upload handler with error handling
-  const handleUpload = async (file: File) => {
+  const handleUpload = async (file: File): Promise<string | null> => {
+    // Updated return type
     try {
       const response = await edgestore.publicFiles.upload({
         file,
@@ -57,7 +58,7 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         onChange={onChange}
-      />
+      /> // Passing argument to onChange
     );
   } else {
     console.error("Error creating BlockNote editor");
